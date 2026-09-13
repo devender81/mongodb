@@ -6,17 +6,21 @@ import (
 	"log"
 	"time"
 
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/devender81/mongodb/employee"
+	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 func main() {
+	emp3 := employee.NewEmployee3("adv1", "devops")
+	fmt.Println(emp3)
+
 	uri := "mongodb+srv://devender:Devender@cluster0.gcq5qxu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
+	client, err := mongo.Connect(options.Client().ApplyURI(uri))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -25,12 +29,12 @@ func main() {
 	if err := client.Ping(ctx, nil); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Connected to Atlas!")
 
-	coll := client.Database("practiceDB").Collection("items")
-	res, err := coll.InsertOne(ctx, map[string]any{"name": "test2", "createdAt": time.Now()})
+	coll := client.Database("practiceDB").Collection("employees")
+
+	id, err := employee.InsertEmployee(ctx, coll, emp3)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Inserted ID:", res.InsertedID)
+	fmt.Println("Inserted employee with ID:", id)
 }
