@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	uri := "mongodb+srv://devender:Mongodb@cluster0.gcq5qxu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+	uri := "mongodb+srv://devender:Devender@cluster0.gcq5qxu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -28,7 +28,7 @@ func main() {
 	fmt.Println("Connected to Atlas!")
 
 	coll := client.Database("practiceDB").Collection("items")
-	res, err := coll.InsertOne(ctx, map[string]any{"name": "test", "createdAt": time.Now()})
+	res, err := coll.InsertOne(ctx, map[string]any{"name": "test2", "createdAt": time.Now()})
 	if err != nil {
 		log.Fatal(err)
 	}
