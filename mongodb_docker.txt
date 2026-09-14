@@ -1,0 +1,33 @@
+To connect mongodb through docker:
+
+In main.go, 
+uri := "mongodb://localhost:27017"  
+
+In cmd,
+docker run -d -p 27017:27017 --name mongo-practice mongo:latest
+
+To verify it worked:
+a. open Compass and connect to mongodb://localhost:27017
+                   (or)
+b. docker exec -it mongo-practice mongosh
+   then inside mongo shell:
+   use practiceDB
+   db.employees.find() 
+
+
+   After finishing work, good habit to stop the container
+      docker stop mongo-practice
+
+      Stop + remove (deletes everything)
+            docker stop mongo-practice
+            docker rm mongo-practice
+
+
+    To start Again for practice:
+          docker start mongo-practice
+
+
+
+
+
+

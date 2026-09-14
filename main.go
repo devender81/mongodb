@@ -12,10 +12,11 @@ import (
 )
 
 func main() {
-	emp3 := employee.NewEmployee3("adv1", "devops")
+	emp3 := employee.NewEmployee3("adv10", "cloud engineer")
 	fmt.Println(emp3)
 
 	uri := "mongodb+srv://devender:Devender@cluster0.gcq5qxu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+	//uri := "mongodb://localhost:27017"    //connecting mongodb through docker
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
